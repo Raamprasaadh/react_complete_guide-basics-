@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 7: reusable components</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+      const MessageElement = (props) => {
+        return <div>{props.msg}</div>;
+      };
+      const element=<div>
+        <MessageElement>Hello</MessageElement>
+        <MessageElement>World</MessageElement>
+        {MessageElement({msg:"All is Well!"})}
+        </div>
+        ReactDOM.render(element, rootElement);
+    </script>
+  </body>
+</html>
