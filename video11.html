@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 11: styling</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <style>
+      .box {
+        border: 1px solid #333;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+      .box--large {
+        width: 270px;
+        height: 270px;
+      }
+      .box--medium {
+        width: 180px;
+        height: 180px;
+      }
+      .box--small {
+        width: 90px;
+        height: 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+        - in below code we have added the code to display a box with different sizes
+        
+        - initially we have written the same code multiple times then with the help of components 
+          we were able to change styles dynamically and use same component to make the different components
+
+    -->
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+      const Box = (props) => {
+        return (
+          <div
+            className={"box box--" + props.className}
+            style={{ fontStyle: "italic", ...props.style }}
+          >
+            {`${props.children} box`}
+          </div>
+        );
+      };
+      const element = (
+        <div>
+          <Box className="small" style={{ backgroundColor: "lightblue" }}>
+            small light-blue
+          </Box>
+          <Box className="medium" style={{ backgroundColor: "pink" }}>
+            medium pink
+          </Box>
+          <Box className="large" style={{ backgroundColor: "orange" }}>
+            large orange
+          </Box>
+
+          {/*//initial way
+          <div
+            className="box box--small"
+            style={{ backgroundColor: "lightblue", fontStyle: "italic" }}
+          >
+            small light-blue box
+          </div>
+          <div
+            className="box box--medium"
+            style={{ backgroundColor: "pink", fontStyle: "italic" }}
+          >
+            medium light-blue box
+          </div>
+          <div
+            className="box box--large"
+            style={{ backgroundColor: "orange", fontStyle: "italic" }}
+          >
+            large light-blue box
+          </div>*/}
+        </div>
+      );
+      ReactDOM.render(element, rootElement);
+    </script>
+  </body>
+</html>
