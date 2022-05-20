@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 6 : Fragments</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  </head>
+  <body>
+      <!--
+        - in jsx we cannot pass two elements as input to render or return statement of any return method
+        - to overcome this we need to wrap the elements with the another element. jsx team created React.Fragment 
+          element to cover multiple elements without any side effects
+        - React.Fragment element can also be invoked by using <> </> empty element brackets
+        - Line Number 29 will not give sny output as there are two elements.
+        - so in line number 30 we have created a fragment and passed it to render method as arguement
+      -->
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+      const helloElement = <span>Hello</span>;
+      const worldElement = <strong>world</strong>;
+      const element = (
+        <React.Fragment>
+          <helloElement />
+          <worldElement />
+        </React.Fragment>
+      );
+      //ReactDOM.render(helloElement, worldElement, rootElement);
+      ReactDOM.render(element, rootElement);
+    </script>
+  </body>
+</html>
