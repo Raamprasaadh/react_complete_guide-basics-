@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video 3 - Creeating an react Element</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  </head>
+  <body>
+      <!-- 
+          - in this we have used a different import method to import react js (using script without 
+            installing using npm) the UNPKG.com
+          - instead of document .createELement we are using the React.createElement();
+           - for createElement method the first parameter is the type of element div, span, etc..
+           - for createElement method the second parameter is an object which contains children and class Name properties.
+           - the children can be an array and what are the elements present in children will be displayed in the element
+           - className will be applied to the element being created
+          -  and we are using the ReactDOM.render method to inject the element created to the root element
+            - the ReactDOM.render() method takes two parameters first one is the element to be injected, second one is the element to which we should inject first one.
+
+            the result of this video is as same as the video 2 but we achieved it using react in children of createElement method we can append more childs
+            it is easy to mani[pulate the dom further to the element we have created
+       -->
+    <div id="root"></div>
+    <script type="text/javascript">
+        const rootElement = document.getElementById("root");
+        const element = React.createElement("div",{
+            children:["Hello World"],
+            className:"container"
+        })
+        ReactDOM.render(element, rootElement);
+
+    </script>
+  </body>
+</html>
