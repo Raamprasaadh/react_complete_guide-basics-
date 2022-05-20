@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Video 4: Creating UI element using JSX syntax </title>
+        <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <!-- 
+            - instead of pure react syntax jsx syntax is the commonly used syntax across the industry.
+            - jsx is nothing but a mix of html and javascript code to be precise we can add javascript code in middle of HTML tags
+            - the addition of js code in middl of html code is achieved by using {}curly bracis.
+            - Here we are using another library named Babel which will be used in react projects by default.
+            - Babel is used to convert JSX syntax to original react syntax.
+            - in line number 22 we have created a div element and straightly assign it to element and then used ReactDOM.
+              render method to 
+            - JSX makes it short to create elements
+        -->
+        <script type="text/babel">
+            var jsVar ="All is well"
+            const rootElement = document.getElementById("root");
+            const element =<div className="container">Hello World!, {jsVar}!</div>
+            ReactDOM.render(element, rootElement);
+        </script>
+
+    </body>
+</html>
