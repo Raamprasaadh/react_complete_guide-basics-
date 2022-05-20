@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Video 5 : jsx-tricks
+        </title>
+        <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <!-- 
+            - Using JSX and curly bracis we can write elements efficiently 
+            - below are some examples
+            - all of them are self explanatory/understandable.
+            - example 5 the class name given as part of div overwrites 
+              the props class Name as it comes last
+        -->
+
+        <script type="text/babel">
+            const rootElement = document.getElementById("root");
+            /* // element way1
+            const className = "container";
+            const element = <div className={className}>
+                <span>Hello</span> <strong>World</strong>
+                </div>*/
+             /*//element way2
+            const className = "container";
+            const children = ['Hello',' ', 'world'];
+            const element = <div className={className}>
+                {children}
+                </div>*/
+            /*//element way3
+            const className = "container";
+            const children = ['Hello',' ', 'world'];
+            const element = <div className={className} children={children}>
+                </div>*/
+            /*//element way4
+            const className = "container";
+            const children = ['Hello',' ', 'world'];
+            const props ={className, children};
+            const element = <div {...props}>
+            </div>*/
+            //element way5
+            const className = "container";
+            const children = ['Hello',' ', 'world'];
+            const props ={className, children};
+            const element = <div {...props} className="not-container">
+            </div>
+
+            ReactDOM.render(element, rootElement);
+        </script>
+    </body>
+</html>
