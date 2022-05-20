@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   </head>
   <body>
-      <!--
+    <!--
         - in jsx we cannot pass two elements as input to render or return statement of any return method
         - to overcome this we need to wrap the elements with the another element. jsx team created React.Fragment 
           element to cover multiple elements without any side effects
@@ -18,15 +18,14 @@
     <div id="root"></div>
     <script type="text/babel">
       const rootElement = document.getElementById("root");
-      const helloElement = <span>Hello</span>;
-      const worldElement = <strong>world</strong>;
+      const HelloElement = <span>Hello</span>;
+      const WorldElement = <strong>world</strong>;
       const element = (
         <React.Fragment>
-          <helloElement />
-          <worldElement />
+          <span>Hello</span> <strong>world</strong>
         </React.Fragment>
       );
-      //ReactDOM.render(helloElement, worldElement, rootElement);
+      //ReactDOM.render(HelloElement, worldElement, rootElement);
       ReactDOM.render(element, rootElement);
     </script>
   </body>
