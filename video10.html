@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 10: re-render a react application</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+        - we are displayin the time using react at that time it is only manipulating that 
+          specific div of time
+        - if we try to do the same with the help of html and dom manipulation 
+          it is re renbdering the entire page/ root element
+        - this process of the updating specific element is achieved by virtual dom concept of react js
+    -->
+    <script type ="text/babel">
+        const rootElement = document.getElementById("root");
+         //pure Html dom manipulation
+        /*const tick=()=>{
+        var time = new Date().toLocaleTimeString();
+        const element = `<div>${time}</div>`
+        rootElement.innerHTML=element;*/
+        
+        //reactjs
+        const tick=()=>{
+        var time = new Date().toLocaleTimeString();
+        const element = <div>{time}</div>
+        ReactDOM.render(element, rootElement);
+        }
+
+        setInterval(tick, 1000);
+        
+    </script>
+  </body>
+</html>
