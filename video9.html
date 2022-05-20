@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> video 9: Interpolation using curly bracis in JSX</title>
+        <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>    
+    </head>
+    <body>
+        <div id="root"></div>
+        <!-- 
+            - JSX allows us to give Javascript values in between the html elements using 
+              curlyBracis
+            - in a functional component there is JSX land and JS land we can get JS land inside JSX land by using curly bracis. 
+        -->
+        <script type="text/babel">
+            const rootElement = document.getElementById("root");
+
+            const CharacterCount =({textId, text})=>{
+                //Js land
+                return( //JSX land
+                    <div className="charCount">
+                    {//JS land
+                        `The text textId has `}
+                        
+                    {//JSland
+                        text.length ? <strong>{text.length}</strong>:'NO'} characters
+                      </div>)
+            }
+            const element = <>
+            <CharacterCount textId={1} text={"Ramprasadh"}/>
+            <CharacterCount textId={2} text={""}/>
+            </>
+            ReactDOM.render(element, rootElement);
+        </script>
+    </body>
+</html>
