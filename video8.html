@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 8 : propTypes</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+  </head>
+  <body>
+      <!--
+          - to do validation in react js we have a method called propTypes
+          - *to add validation to a functions props we have to add functionName.propTypes{validations} before the render method and element calling the function
+          - we can define it manally by ourselves for each field similar to the method 1 and method 2
+          - method 1 gives validation specifically to the firstName property
+          - method two commonises the validation for string values and adds them to a variable called PropTypes and 
+            function.propTypes will take the validation function because we are specifying it in the value of key
+            ex: firstName: PropTypes.string. this will take the validation string function from PropTypes const automatically
+          - There is an inbuilt javascript library for PropTypes so we need not explicitly mention the basic validations
+            instead we can import the package and in function.propTypes we can add the fields and validation types to be validated
+          - isRequired flag will make the field value mandatory.
+          - mostly this propTypes library is automatically invoked by react or babel library no need to expicitly import them
+          - this propTypes Validations will not work in production builds.
+          - to read more about propTypes Validation refer https://www.npmjs.com/package/prop-types
+
+      -->
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+      function SayHello({ firstName, lastName }) {
+        return (
+          <div className="sayHello">
+            Hello {firstName} {lastName}!
+          </div>
+        );
+      }
+      /* method 1
+      SayHello.propTypes = {
+        firstName(props, propName, componentName) {
+          if (typeof props[propName] !== "string") {
+            return new Error(
+              `Hey the ${componentName} expected the value or the property ${propName} to be string but you passed${typeof props[
+                propName
+              ]}`
+            );
+          }
+        },
+      };*/
+      /* method 2
+      const PropTypes = {
+        string(props, propName, componentName) {
+          if (typeof props[propName] !== "string") {
+            return new Error(
+              `Hey the ${componentName} expected the value or the property ${propName} to be string but you passed
+              ${typeof props[propName]}`
+            );
+          }
+        },
+      };
+      SayHello.propTypes = {
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+      };*/
+      // method 3
+      
+      SayHello.propTypes = {
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+      };
+      //const hello = <SayHello firstName={false} lastName={90} />;
+      const hello = <SayHello firstName={"Ramprasadh"} lastName={"Natarajan"} />;
+      ReactDOM.render(hello, rootElement);
+    </script>
+  </body>
+</html>
