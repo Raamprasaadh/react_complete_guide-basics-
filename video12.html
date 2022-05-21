@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<htmlk>
+  <head>
+    <title>video 12: Event handling</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+        - in react Event system we pass the event handlers to event methods straightly to the element
+        - eventHandling is done using  functions such as onClick, onChange, onFocus, onBlur, onMouseOver etc
+        - we can call some function on event of an html element
+        - to read more about eventHandling functions
+        - here we have used the state and event functions onClick and onChange to display dynamic data
+    -->
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+      const state = { eventCount: 0, userName: "" };
+      function App() {
+        return (
+          <div>
+            <p>There have been {state.eventCount} events</p>
+            <p>
+              <button
+                onClick={() => setState({ eventCount: state.eventCount + 1  })}
+              >
+                CLick ME!
+              </button>
+            </p>
+            <p>you typed:{state.userName}</p>
+            <p>
+              <input onChange={(e) => setState({ userName: e.target.value})} />
+            </p>
+          </div>
+        );
+      }     
+      
+      function setState(newState) {
+        Object.assign(state, newState);
+        renderApp();
+      }
+
+      function renderApp() {
+        ReactDOM.render(<App />, rootElement);
+      }
+      
+      renderApp();
+    </script>
+  </body>
+</htmlk>
