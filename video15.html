@@ -21,7 +21,7 @@
       const rootElement = document.getElementById("root");
       function Greeting() {
         //useState lazy initialisation
-        //as we have given a function it will be called only when necessary not everytime
+        //as we have given a function it will be called only when necessary(only on first render) not everytime
         const [name, setName] = React.useState(
           () => window.localStorage.getItem("name") || ""
         );

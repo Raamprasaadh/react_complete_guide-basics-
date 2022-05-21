@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>video 16 : useEffect Dependency Array</title>
+        <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <!-- 
+            - the below code has two components App and greeting 
+            - Greeting is part of App component as aresult if App is re rendered Greetings useEffect will also be rerendered
+            - to avoid unnecessary re rendering we use dependancy array for the useEffect method
+            - by default useEffect method takes two parameters first is the function to be called when there is a change in component
+            - second arguement is an array of variable/values on change of which the first arguement function should be called
+            - dependancy array helps us to avoid unnecessary re rendering of the components 
+            - it is important to maintain the value of dependancy array accurate and clean so when there is a necessary change the 
+              function will be called and useEffect will update the data in parallel to the component
+        -->
+        <script type="text/babel">
+            const rootElement = document.getElementById("root");
+            function Greeting(){
+                const [name,setName]= React.useState(()=>{
+                    //lazy initialisation to the state
+                    window.localStorage.getItem("name")||"";
+                });
+                //Adds dependancy array for useEffect function
+                const handleChange =e => window.localStorage.setItem("name", e.target.value)
+                React.useEffect(()=>{
+                    console.log("rendering Greeting component");
+                    window.localStorage.setItem("name", name);
+                },[name]);
+                return(
+                    <div>
+                        <form>
+                            <label htmlFor="name">Name: </label>
+                            <input id="name" value={name} onChange={handleChange} />
+                        </form>
+                    </div>
+                )
+            }
+            function App (){
+                const [count, setCount] = React.useState(0);
+                const handleCount = () => setCount(count+1);
+                return <div>
+                        <button onClick={handleCount}>{count}</button>
+                        <Greeting />
+                    </div>
+            }
+            ReactDOM.render(<App/>, rootElement);
+        </script>
+    </body>
+</html>
