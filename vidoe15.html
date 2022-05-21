@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 15: lazy initialiation of useState</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+        - the functional component re renders everytime there is a state change 
+        - at the time of state change when useState will also set the value by going through the code
+        - if the code inside useState is costly in time wise we can create an arrow function in order to 
+          minimise the execution of code inside the useState. this process of adding a function inside useState
+          is called as the lazy initialisation of the useState
+        - the function inside the useState  will be called when it is really necessary
+    -->
+    <script type="text/babel">
+
+      const rootElement = document.getElementById("root");
+      function Greeting() {
+        //useState lazy initialisation
+        //as we have given a function it will be called only when necessary not everytime
+        const [name, setName] = React.useState(
+          () => window.localStorage.getItem("name") || ""
+        );
+        // this area and use effect get re rendered/called again when component re renders
+        /* useState normal Initialisation
+        const [name, setName] = React.useState(
+          window.localStorage.getItem("name") || ""
+        );*/
+        const handleChange = (e) => setName(e.target.value);
+        React.useEffect(() => {
+          window.localStorage.setItem("name", name);
+        });
+        return (
+          <div>
+            <form>
+              <label htmlFor="name">Name: </label>
+              <input
+                type="text"
+                onChange={handleChange}
+                value={name}
+                id="name"
+              />
+            </form>
+            {`typed value is : ${name}`}
+          </div>
+        );
+      }
+      ReactDOM.render(<Greeting />, rootElement);
+    </script>
+  </body>
+</html>
