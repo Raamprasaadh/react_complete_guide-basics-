@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<htmlk>
+<html>
   <head>
     <title>video 12: Event handling</title>
     <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
@@ -19,19 +19,25 @@
       const rootElement = document.getElementById("root");
       const state = { eventCount: 0, userName: "" };
       function App() {
+          function handleChange(e){
+            setState({ userName: e.target.value});
+          }
+          function handleClick(){
+            setState({ eventCount: state.eventCount+1});
+          }
         return (
           <div>
             <p>There have been {state.eventCount} events</p>
             <p>
               <button
-                onClick={() => setState({ eventCount: state.eventCount + 1  })}
+                onClick={() => handleClick}
               >
                 CLick ME!
               </button>
             </p>
             <p>you typed:{state.userName}</p>
             <p>
-              <input onChange={(e) => setState({ userName: e.target.value})} />
+              <input onChange={(e) => handleChange(e)} />
             </p>
           </div>
         );
@@ -49,4 +55,4 @@
       renderApp();
     </script>
   </body>
-</htmlk>
+</html>
