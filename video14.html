@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 14: hooks useEffect</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 
+        - React.useEffect is another hook used to get behaviour of componentDIdUpdate state
+          method in functional component 
+        - the function inside the useEffect will be executed every time the component updates
+        - in this page we are using the useEffect to set the value of name in local storage and whenever the component renders we will update the value of text box
+          in localstorage this is achieved by using window.localstorage.setItem method
+        - we are maintaining the value in local storage even if the page refreshes by setting the window.localstorage.getItem
+    -->
+    <script type="text/babel">
+
+      const rootElement = document.getElementById("root");
+
+      function App() {
+        const [name, setName] = React.useState(window.localStorage.getItem("name")||"");
+        const handleChange = (e) => setName(e.target.value);
+        React.useEffect(()=>{
+            window.localStorage.setItem("name",name     );
+        })
+        return (
+          <div>
+            <form>
+              <label htmlFor="name">Name: </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={handleChange}
+              />
+                {`typed value is : ${name}`}
+
+            </form>
+          </div>
+        );
+      }
+      const element = <App />
+      ReactDOM.render(element, rootElement);
+    </script>
+  </body>
+</html>
