@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>video 13: hooks useState state</title>
+        <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <!--
+            - in react we use useState hook to maintain state in a functional component
+            - useState hook returns an array first one stores the value of that element
+            - second element stores the setter function for the value
+            - now we can use the setter function to modify the value
+            - the value stored in the state can be any data type array, object, string and number
+            - while setting the value we have to use a function that will properly set the values
+        -->
+        <script type="text/babel">
+            /*
+            it also can be written as
+            const stateArray = React.useState("");
+            const name stateArray[0];
+            const setName stateArray[1];*/
+            const rootElement = document.getElementById("root");
+            function Greeting(){
+                const [name, setName] = React.useState("");
+            const handleChange =(e)=>setName(e.target.value)
+                return<div>
+                    <form>
+                        <label htmlFor="name">Name: </label><br/>
+                        <input type="text" onChange={(e)=>handleChange(e)} id="name"/>
+                        <br/>
+                        {name? `Hello ${name}`:`please enter your name`}
+                    </form>
+                    </div>
+            }
+            
+            ReactDOM.render(<Greeting />, rootElement);
+        </script>
+    </body>
+</html>
