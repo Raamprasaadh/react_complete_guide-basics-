@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 20: Basic forms</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+        - React forms the best practice is to add submit form to form element instead of submit button
+          when we add the submit to the form any action that copuld trigger submit will submit the form like pressing the enter 
+          in one of the input field
+        - in submit handle function e.preventDefault will prevent the default behaviour and continue to execute our code
+        - elements of form can be retrieved in multiple ways from the form event
+            - method 1 :using the querySelector to get value using Dom manipulation it is better to avoid this as it will get all the inp[ut from the entire page
+
+            - method 2 : form.target[0]. value, the form .target will be an array and contain the elements inside the form.we can access them using the array index
+            - method 3 : it is similar to the method 2 this time instead of accessing form.target array we will be accessing the target.element array
+            - both method 2 and method 3 are not robust as in future if there is an additional element this will change the behaviour
+            - method 4: the best way is to add tan id to the element and use that id to retreiv value from target e.target.idValue will retrieve the value
+            - method 5: we can create an ref using useRef hook of react and assign it to the element and use ref.current.value to retrieve the value
+            - best practice in any form or any label and element has to be tagged using id and htmlFOr value so when we clickon the label it will highlight the element
+        -->
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+      function Form() {
+        const inputRef = React.useRef();
+        function handleSubmit(e) {
+          e.preventDefault();
+          //method 1
+          //const value = document.querySelector("input").value;
+          //method2
+          //const value = e.target[0].value;
+          //method3
+          //const value = e.target.elements[0].value
+
+          //method4
+          const value = e.target.userName.value;
+
+          //method 5
+          const value2 = inputRef.current.value;
+          window.alert(`Hey there ${value +" " +value2}`);
+        }
+        return (
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="userName">Username : </label>
+              <input ref={inputRef} id="userName" type="text" />
+            </div>
+            <button>Submit</button>
+          </form>
+        );
+      }
+      ReactDOM.render(<Form />, rootElement);
+    </script>
+  </body>
+</html>
