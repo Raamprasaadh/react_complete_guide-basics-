@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 21 Dynamic forms</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  </head>
+  <body>
+      <div id="root"></div>
+      <!--
+          - one of the advantages of the react is dynamic checking of values
+          - lets say in our form we need to validate if the name field is having only lowerCasee letter.
+            if its not we have to display an error and disanble submit button
+          - we can do that by adding a dynamic variable error which holds the error when the   value of input field is wrong
+          - we can also dynamically display the error
+          - instead of retrieving values from form event we can add event to individual elements and store then=m in state and use later
+      -->
+      <script type ="text/babel">
+          const rootElement = document.getElementById("root");
+          
+          function Form(){
+              const [name, setName] = React.useState("");
+              
+
+              let error = (name === name.toLowerCase()) ? null : "Name field should contain only the lowerCase values";
+              const handleSubmit= (e)=>{
+                  e.preventDefault();
+                  window.alert(`Hey there ${name}! How you Doin?`)
+              }
+              const handleChange=(e)=>{
+                  setName(e.target.value)
+              }
+              return(
+                  <form onSubmit ={handleSubmit}>
+                    <div>
+                        <label htmlFor="name">
+                            Name: 
+                        </label>
+                        <input type="text" value={name} onChange ={handleChange}/>
+                        <div style={{color:"red"}}>{error}</div>
+                        </div>
+                        <button disabled={Boolean(error)}>Submit</button>
+                    </form>
+              )
+          }
+          ReactDOM.render(<Form />, rootElement);
+      </script>
+  </body>
+</html>
