@@ -1,0 +1,42 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title> video22: controlling form values </title>
+        <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>    
+    </head>
+    <body>
+        <div id="root"></div>
+        <!--
+            - as we have added Id to elements individually now we will be able to control that element
+            - here onChange event of that element we are converting the typed text to lowercase by controlling 
+              the input from user we are avoiding unnecessary mistakes
+            - while doing some inside controlling to avoid confusion and to enhance usability it is better to display message
+        -->
+        <script type ="text/babel">
+            const rootElement = document.getElementById("root");
+            function Form(){
+                const [name,setName]= React.useState("");
+                const handleChange=(e)=>{
+                    setName(e.target.value.toLowerCase());
+                }
+                const handleSubmit=(e)=>{
+                    e.preventDefault();
+                    window.alert(`Hey ${name}, How you Doin?`);
+                }
+                return(<div>
+                    <form onSubmit = {handleSubmit}>
+                        <div>
+                            <label htmlFor="name">Name : </label>
+                            <input type="text" value={name} onChange={handleChange}/>
+                            info : name field take only lower case letters, so it will automatically convert the value to lower case
+                        </div>
+                        <button>Submit</button>
+                    </form>
+                    </div>)
+            }
+            ReactDOM.render(<Form />, rootElement);
+        </script>
+    </body>
+</html>
