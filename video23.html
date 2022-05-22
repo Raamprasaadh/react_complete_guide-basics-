@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video 23: Error boundaries</title>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/react-error-boundary@1.2.5/dist/umd/react-error-boundary.js"></script>
+  </head>
+  <body>
+    <div id="root">Test</div>
+    <!--
+        - Error boundaries are used to catch error thrown at the middle of the rendering 
+          and display another component without crashing the application
+        - we can normally create an error boundary manually which should be class component 
+          and state should be error in objects{error}
+          -method getDerivedStateFromError should be there which should take {error} as input and return {error} as output.
+          -render method should render the error component if this.state.error is true
+          -else render the children it recieved as part of props
+        - the component where we expect the error should be covered with <ErrorBoundary> component
+          and the error boundary will take one component as input FallbackComponent which can be used to returned at the time of error
+        - instead of creating our own error boundary we can import ErrorBoundary library and use the same practices as above it will catch the errors
+        - a component can have multiple error boundaries with different FallbackComponents the one close to the place error occured will catch and display 
+          the respective fallback component
+    -->
+    <script type="text/babel">
+      const ErrorBoundary = ReactErrorBoundary.ErrorBoundary;
+      const rootElement = document.getElementById("root");
+      const Bomb = () => {
+        throw new Error("Caboom !@#$");
+      };
+      
+    //method1 
+    //   class ErrorBoundary extends React.Component {
+    //     state = { error: null };
+    //     static getDerivedStateFromError(error) {
+    //       return {error};
+    //     }
+    //     render() {
+    //       const { error } = this.state;
+    //       if (error) {
+    //         return <this.props.FallBackComponent error={error}/>;
+    //       }
+    //       return this.props.children;
+    //     }
+    //   }
+      function ErrorFallBack (error){
+          console.log(error.error.message);
+          return<div>
+            <p>Error</p>
+            <pre>{error.error.message}</pre>
+            </div>
+      }
+      function App() {
+        const [error, setError] = React.useState(false);
+        return (
+          <div>
+            <button onClick={() => setError(true)}>bomb</button>
+            <ErrorBoundary FallbackComponent={ErrorFallBack}>
+              {error ? <Bomb /> : `click the bomb button`}
+            </ErrorBoundary>
+          </div>
+        );
+      }
+      ReactDOM.render(<App />, rootElement);
+    </script>
+  </body>
+</html>
