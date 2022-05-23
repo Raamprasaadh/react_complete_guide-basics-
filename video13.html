@@ -29,8 +29,9 @@
                 return<div>
                     <form>
                         <label htmlFor="name">Name: </label><br/>
-                        <input type="text" onChange={(e)=>handleChange(e)} id="name"/>
+                        <input type="text" value={name} onChange={(e)=>handleChange(e)} id="name"/>
                         <br/>
+                        
                         {name? `Hello ${name}`:`please enter your name`}
                     </form>
                     </div>
